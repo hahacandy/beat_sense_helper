@@ -1,1 +1,5 @@
 初期情報をロードする時にまだ時々エラーがある
+
+https://chrome.google.com/webstore/detail/user-javascript-and-css/nbhcbdghjpllgmfilhnhkllmkecfmpld
+のような拡張機能を使ってコードを適用したら
+ウェブをリロードしても自動でコードが適用される
