@@ -1,4 +1,5 @@
-//2021/12/18/01:07 by 카캇테코이요
+//2022/07/16/21:44 by 카캇테코이요
+var is_notice = false;
 function run_code(_code){
 	var script = document.createElement('script');  
 	script.innerHTML = _code;  
@@ -84,8 +85,11 @@ function vote_auto(_feed_msg, _feed_msg_time, _include_id){
 }
 function get_user_id(){
 	if(user_id == null && ((new Date()-start_time)/1000) > 10){
-		alert('카캇테코이요 : 초기 정보 받아오기 실패, 새로고침 함');
-		window.location.reload();
+		if(is_notice == false){
+			is_notice == true;
+			alert('카캇테코이요 : 초기 정보 받아오기 실패, 새로고침 해야함');
+			window.location.reload();
+		}
 		return false;
 	}
 	return user_id
