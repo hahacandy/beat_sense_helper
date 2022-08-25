@@ -1,5 +1,4 @@
-//2022/07/16/21:44 by 카캇테코이요
-var is_notice = false;
+//2022/08/25/23:51 by 카캇테코이요
 function run_code(_code){
 	var script = document.createElement('script');  
 	script.innerHTML = _code;  
@@ -56,7 +55,7 @@ function vote_auto(_feed_msg, _feed_msg_time, _include_id){
 							play_by_user = user_song.getElementsByClassName('playlistRow_byUser')[0].textContent;\
 						}\
 					});\
-					play_by_current_user = (play_by_user == get_user_id());\
+					play_by_current_user = (play_by_user == user_id);\
 				}catch{}\
 				if(!autoVoted && !play_by_current_user){\
 					angular.element('#currSongThumbUp_forTutorial').scope().vote(1);\
@@ -68,7 +67,7 @@ function vote_auto(_feed_msg, _feed_msg_time, _include_id){
 						setTimeout(function(_include_id) {\
 							var feed_input = angular.element('#vote-feedback-input-holder > input').scope();\
 							if(_include_id){\
-								feed_input.voteFeedbackContent = get_user_id() + ' : ' + _feed_msg;\
+								feed_input.voteFeedbackContent = user_id + ' : ' + _feed_msg;\
 							}else{\
 								feed_input.voteFeedbackContent = _feed_msg;\
 							}\
@@ -83,17 +82,17 @@ function vote_auto(_feed_msg, _feed_msg_time, _include_id){
 		vote_auto(\"" + _feed_msg + "\",  "+_feed_msg_time+", "+_include_id+"); ";
 	run_code(_code);
 }
-function get_user_id(){
+var is_notice = false;
+function check_user_id(){
 	if(user_id == null && ((new Date()-start_time)/1000) > 10){
 		if(is_notice == false){
-			is_notice == true;
+			is_notice = true;
 			alert('카캇테코이요 : 초기 정보 받아오기 실패, 새로고침 해야함');
 			window.location.reload();
 		}
-		return false;
 	}
-	return user_id
 }
+setInterval(check_user_id, 1000);
 function check_AFK(_afk_msg, _afk_wait_time){
 	var _code = "\
 		var focused = true;\
@@ -133,8 +132,8 @@ function check_AFK(_afk_msg, _afk_wait_time){
 							if (!focused){\
 								Array.prototype.forEach.call(chatting_call_msgs, function(called_user) {\
 									var called_user = called_user.text;\
-									var regex = new RegExp('^\\\\[AFK\\\\] @'+get_user_id()) ;\
-									if( called_user == '@'+get_user_id() && chatting_id != called_user && chatting_id != 'BeatSense' && !regex.test(chatting_msg.textContent)){\
+									var regex = new RegExp('^\\\\[AFK\\\\] @'+user_id) ;\
+									if( called_user == '@'+user_id && chatting_id != called_user && chatting_id != 'BeatSense' && !regex.test(chatting_msg.textContent)){\
 										angular.element(text_chat_input).scope().value = '[AFK] @' + chatting_id + ', ' + _afk_msg;\
 										var e =  {isTrusted: true, keyCode:65, currentTarget:text_chat_input};\
 										var e2 =  {keyCode:13, currentTarget:text_chat_input};\
@@ -308,7 +307,7 @@ function show_remaining_time(){
 				sec = '0' + sec;
 			return hour+":"+min+":" + sec;
 		}
-		var temp = document.querySelector('#left-top-playerControls > div.item.timer.ng-scope.ng-isolate-scope > div > div').textContent;
+		var temp = document.querySelector('#left-top-playerControls > div.item.timer.ng-isolate-scope > div > div').textContent;
 		var temp2 = temp.split('/');
 		cal_text_to_time('minus', temp2[0], 0);
 		cal_text_to_time('plus', temp2[1], 0);
@@ -316,7 +315,7 @@ function show_remaining_time(){
 		var index = 0;
 		for (var el of temp){
 			var song_list_user_id = el.getElementsByClassName('playlistRow_byUser')[0].textContent;
-			if (song_list_user_id == get_user_id() && index > 0){
+			if (song_list_user_id == user_id && index > 0){
 				is_my_song = true;
 				break;
 			}
@@ -343,8 +342,8 @@ function show_remaining_time(){
 
 get_auto_beats(); // Claim da Beats! 버튼을 누를 수 있게 되면 눌러서 공짜 비트를 받는다.
 change_order(); // 채팅창 동영상 노래리스트 순서를 노래리스트 동영상 채팅창 으로 순서를 바꿈
-change_url_to_img(true, 350, 350); // 350px 채팅창 이미지 가로길이,  350px 채팅창 이미지 세로길이
-resize_chatting_box(400, 650); // 채팅창 폭넓이 400px,  채팅창 세로넓이 650px
+change_url_to_img(true, 300, 300); // 350px 채팅창 이미지 가로길이,  350px 채팅창 이미지 세로길이
+resize_chatting_box(350, 600); // 채팅창 폭넓이 400px,  채팅창 세로넓이 650px
 vote_auto("좋아요!", 0, true); // 좋아요 눌렀는지 확인하고 안눌렀으면 누름, "" 안의 텍스트가 추천누르고 피드백 남길 메시지장, 5= 추천누르고 5초뒤에 피드백 메시지 보냄, true=추천 피드백 메시지 남길때 자신의 아이디를 앞에 붙힘, false = 자신의 아이디 안붙힘 
-check_AFK("今は席を外しています。", 180); // "" 의 안의 텍스트가 akf 메시지로 설정됨, 해당 브라우저를 떠난뒤 몇초후에 작동할것인가
+check_AFK("今は席を外しています。", 30); // "" 의 안의 텍스트가 akf 메시지로 설정됨, 해당 브라우저를 떠난뒤 몇초후에 작동할것인가
 show_remaining_time(); // 내가 등록한 노래가 언제 재생되는지 표시
