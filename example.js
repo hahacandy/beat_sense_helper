@@ -84,7 +84,7 @@ function vote_auto(_feed_msg, _feed_msg_time, _include_id){
 }
 var is_notice = false;
 function check_user_id(){
-	if(window.location.href != 'https://www.beatsense.com/'){
+	if(window.location.href != 'https://www.beatsense.com/' && !window.location.href.includes('#')){
 		if(user_id == null && ((new Date()-start_time)/1000) > 10){
 			if(is_notice == false){
 				is_notice = true;
