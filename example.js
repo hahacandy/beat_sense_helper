@@ -1,4 +1,4 @@
-//2022/08/26/20:55 by 카캇테코이요
+//2022/09/03/22:04 by 카캇테코이요
 function run_code(_code){
 	var script = document.createElement('script');  
 	script.innerHTML = _code;  
@@ -95,6 +95,22 @@ function check_user_id(){
 	}
 }
 setInterval(check_user_id, 1000);
+
+if (Notification.permission !== 'granted') {
+  Notification.requestPermission();
+}
+function showNotification(title_msg, Content_msg) {
+if (Notification.permission !== 'granted') {
+  Notification.requestPermission();
+} else {
+  const options = {
+    body: Content_msg,
+    dir: 'ltr',
+    icon: 'https://beatsense.com/static/images/logo_meta.png'
+  };
+  const notification = new Notification(title_msg, options);
+}
+}
 function check_AFK(_afk_msg, _afk_wait_time){
 	var _code = "\
 		var focused = true;\
@@ -141,6 +157,7 @@ function check_AFK(_afk_msg, _afk_wait_time){
 										var e2 =  {keyCode:13, currentTarget:text_chat_input};\
 										angular.element(text_chat_input).scope().onKeyUp(e);\
 										angular.element(text_chat_input).scope().onKeyPress(e2);\
+										showNotification(chatting_id, chatting_msg.textContent);\
 									}\
 								});\
 							}\
@@ -344,8 +361,8 @@ function show_remaining_time(){
 
 get_auto_beats(); // Claim da Beats! 버튼을 누를 수 있게 되면 눌러서 공짜 비트를 받는다.
 change_order(); // 채팅창 동영상 노래리스트 순서를 노래리스트 동영상 채팅창 으로 순서를 바꿈
-change_url_to_img(true, 300, 300); // 350px 채팅창 이미지 가로길이,  350px 채팅창 이미지 세로길이
-resize_chatting_box(350, 600); // 채팅창 폭넓이 400px,  채팅창 세로넓이 650px
+change_url_to_img(true, 300, 300); //채팅에 이미지 링크가 있으면 이미지로 바꿀것인가, 채팅창 이미지 가로길이 px , 채팅창 이미지 세로길이 px
+resize_chatting_box(350, 600); // 채팅창 폭넓이 px,  채팅창 세로넓이 px
 vote_auto("좋아요!", 0, true); // 좋아요 눌렀는지 확인하고 안눌렀으면 누름, "" 안의 텍스트가 추천누르고 피드백 남길 메시지장, 5= 추천누르고 5초뒤에 피드백 메시지 보냄, true=추천 피드백 메시지 남길때 자신의 아이디를 앞에 붙힘, false = 자신의 아이디 안붙힘 
-check_AFK("今は席を外しています。", 30); // "" 의 안의 텍스트가 akf 메시지로 설정됨, 해당 브라우저를 떠난뒤 몇초후에 작동할것인가
+check_AFK("今は席を外しています。", 0); // "" 의 안의 텍스트가 akf 메시지로 설정됨, 해당 브라우저를 떠난뒤 몇초후에 작동할것인가
 show_remaining_time(); // 내가 등록한 노래가 언제 재생되는지 표시
