@@ -121,7 +121,7 @@ function check_AFK(_afk_msg, _afk_wait_time){
 		window.onblur = function() {focused = false; latest_wait_time=new Date();};\
 		function init_AFK(){\
 			try{\
-			var beats_infos = document.evaluate('/html/head/script[5]/text()', document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.textContent;\
+			var beats_infos = document.evaluate('/html/head/script[4]/text()', document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.textContent;\
 			var beats_infos = beats_infos.substring(beats_infos.lastIndexOf('(\\'') + 2 , beats_infos.lastIndexOf('\\')'));\
 			var beats_infos = beats_infos.replace('\\\\\\'', '');\
 			var beats_infos = JSON.parse(beats_infos);\
