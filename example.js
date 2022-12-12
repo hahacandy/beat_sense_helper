@@ -1,4 +1,4 @@
-//2022/09/03/22:04 by 카캇테코이요
+//2022/12/12/21:04 by 카캇테코이요
 function run_code(_code){
 	var script = document.createElement('script');  
 	script.innerHTML = _code;  
