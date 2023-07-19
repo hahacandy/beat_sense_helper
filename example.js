@@ -372,7 +372,7 @@ function remove_contribute_notification(){
 get_auto_beats(); // Claim da Beats! 버튼을 누를 수 있게 되면 눌러서 공짜 비트를 받는다.
 change_order(); // 채팅창 동영상 노래리스트 순서를 노래리스트 동영상 채팅창 으로 순서를 바꿈
 change_url_to_img(true, 300, 300); //채팅에 이미지 링크가 있으면 이미지로 바꿀것인가, 채팅창 이미지 가로길이 px , 채팅창 이미지 세로길이 px
-resize_chatting_box(350, 600); // 채팅창 폭넓이 px,  채팅창 세로넓이 px
+resize_chatting_box(450, 600); // 채팅창 폭넓이 px,  채팅창 세로넓이 px
 vote_auto("좋아요!", 1, true); // 좋아요 눌렀는지 확인하고 안눌렀으면 누름, "" 안의 텍스트가 추천누르고 피드백 남길 메시지장, 5= 추천누르고 5초뒤에 피드백 메시지 보냄, true=추천 피드백 메시지 남길때 자신의 아이디를 앞에 붙힘, false = 자신의 아이디 안붙힘 
 check_AFK("今は席を外しています。", 0); // "" 의 안의 텍스트가 akf 메시지로 설정됨, 해당 브라우저를 떠난뒤 몇초후에 작동할것인가
 show_remaining_time(); // 내가 등록한 노래가 언제 재생되는지 표시
